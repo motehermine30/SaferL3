@@ -3,7 +3,10 @@
 {% block title %}ADMIN{% endblock %}
 
 {% block body %}
-<div>
-    <h1>HOME Admin</h1>
+<div class="mt-4">
+    <a href="{{path('app_bien_index')}}" class="btn btn-primary">Gerer les biens</a>
+    <a href="{{path('app_categorie_index')}}" class="btn btn-warning">Gerer les categories</a>
+    <a href="{{path('app_contact_index')}}" class="btn btn-success">Gerer les Contact</a>
+    <a href="{{path('app_logout')}}" class="btn btn-danger">Se Deconnecter</a>
 </div>
 {% endblock %}

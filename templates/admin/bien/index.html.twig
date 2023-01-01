@@ -1,0 +1,47 @@
+{% extends 'layouts/admin.html.twig' %}
+{% block title %}Biens{% endblock %}
+{% block body %}
+    <h1>Biens</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Numero</th>
+                <th>Surface</th>
+                <th>Ville</th>
+                <th>Code Postal</th>
+                <th>Prix Mensuel</th>
+                <th>Prix Final</th>
+                <th>Descriptif</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for bien in biens %}
+            <tr>
+                <td>{{ bien.id }}</td>
+                <td>{{ bien.titre }}</td>
+                <td>{{ bien.numero }}</td>
+                <td>{{ bien.surface }}</td>
+                <td>{{ bien.ville }}</td>
+                <td>{{ bien.codePostal }}</td>
+                <td>{{ bien.prixMensuel }}</td>
+                <td>{{ bien.prixFinal }}</td>
+                <td>{{ bien.descriptif }}</td>
+                <td>
+                    <a href="{{ path('app_bien_show', {'id': bien.id}) }}">Voir</a>
+                    <a href="{{ path('app_bien_edit', {'id': bien.id}) }}">Editer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucun bien disponible</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_bien_new') }}">Ajout de Bien</a>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title %}Modification-Bien{% endblock %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+{% block body %}
+    <h1>Modification de Bien</h1>
+
+    {{ include('admin/bien/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_bien_index') }}">Liste de categorie</a>
+
+    {{ include('admin/bien/_delete_form.html.twig') }}
+{% endblock %}
