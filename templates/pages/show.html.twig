@@ -1,0 +1,52 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title bien.titre %}
+
+{% block body %}
+<div class="jumbotron mt-4">
+    <div class="container">
+          <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4">
+            <h1>{{bien.titre}}</h1>
+            <h2>{{bien.surface}} m2</h2>
+            <div class="text-primary">{{bien.prixMensuel | number_format(0,'','') }} €</div>
+            <div class="text-primary">{{bien.prixFinal | number_format(0,'','') }} €</div>
+            <a href="" class="btn btn-primary btn-lg">Favorie</a>
+        </div>
+    </div>
+    </div>
+</div>
+<div class="container mt-4">
+    <p>
+        {{bien.descriptif | nl2br}}
+    </p>
+    <div class="row">
+        <div class="col-md-12">
+        <h2>Caracteristiques</h2>
+            <table class="table table-striped">
+                <tr>
+                    <td>Surface<td>
+                    <td>{{bien.surface}} m2<td>
+                </tr>
+                 <tr>
+                    <td>Prix Mensuel<td>
+                    <td>{{bien.prixMensuel}}<td>
+                </tr>
+                 <tr>
+                    <td>Prix Final<td>
+                    <td>{{bien.prixFinal}}<td>
+                </tr>
+                 <tr>
+                    <td>Code Postal<td>
+                    <td>{{bien.codePostal}}<td>
+                </tr>
+                 <tr>
+                    <td>Ville<td>
+                    <td>{{bien.ville}}<td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

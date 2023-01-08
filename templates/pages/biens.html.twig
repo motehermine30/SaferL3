@@ -3,8 +3,17 @@
 {% block title %}BIENS{% endblock %}
 
 {% block body %}
-<div>
-    <h1>BIENS PAGE</h1>
-    <a href="{{path('app_home')}}" class="btn btn-primary">Aller Homme</a>
+<div class="container mt-4">
+    <h1>NOS BIENS </h1>
+   <div class="row">
+     {% for bien in biens %}
+        <div class="col-md-4">
+            {% include "layouts/partials/_bien.html.twig" %}
+        </div>
+    {% endfor %}
+   </div>
+   <div class="navigation">
+    {{ knp_pagination_render(biens) }}
+</div>
 </div>
 {% endblock %}

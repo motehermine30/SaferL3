@@ -30,11 +30,11 @@ class BienController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $bienRepository->save($bien, true);
-
+            $this->addFlash('success','Bien bien enregistre');
             return $this->redirectToRoute('app_bien_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin/bien/new.html.twig', [
+        return $this->render('admin/bien/new.html.twig', [
             'bien' => $bien,
             'form' => $form,
         ]);
@@ -56,11 +56,12 @@ class BienController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $bienRepository->save($bien, true);
+            $this->addFlash('success','Bien bien modifie');
 
             return $this->redirectToRoute('app_bien_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin/bien/edit.html.twig', [
+        return $this->render('admin/bien/edit.html.twig', [
             'bien' => $bien,
             'form' => $form,
         ]);
@@ -72,6 +73,8 @@ class BienController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$bien->getId(), $request->request->get('_token'))) {
             $bienRepository->remove($bien, true);
         }
+        $this->addFlash('success','Bien bien supprime');
+
 
         return $this->redirectToRoute('app_bien_index', [], Response::HTTP_SEE_OTHER);
     }

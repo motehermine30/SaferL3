@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Bien;
 use App\Repository\BienRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface; 
+use Symfony\Component\HttpFoundation\Request; 
 
 class DefaultController extends AbstractController
 {
@@ -23,8 +26,29 @@ class DefaultController extends AbstractController
         return $this->render('admin/index.html.twig');
     }
     #[Route('/Biens', name: 'app_biens')]
-    public function biens(): Response
+    public function biens(BienRepository $bienRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        return $this->render('pages/biens.html.twig');
+        $data = $bienRepository->findBy([],['created_at' => 'desc']);
+        $biens = $paginator->paginate(
+            $data, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            6 // Nombre de résultats par page
+        );
+        return $this->render('pages/biens.html.twig',[
+            'current_menu'=>'bien',
+            'biens' => $biens,
+        ]);
+    }
+
+    #[Route('/Biens/{slug}-{id}', name: 'bien_show', methods: ['GET'], requirements:["slug" => "[a-z0-9\-]*"])]
+    public function show(Bien $bien, string $slug): Response
+    {
+        if ($bien->getSlug() !== $slug) {
+           return $this->redirectToRoute('bien_show',['id'=>$bien->getId(),'slug'=>$bien->getSlug()],301);
+        }
+        return $this->render('pages/show.html.twig', [
+            'current_menu'=>'bien',
+            'bien' => $bien,
+        ]);
     }
 }

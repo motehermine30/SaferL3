@@ -63,8 +63,11 @@
   {% for bien in biens %}
       <div class="card mx-2 my-2" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title">{{bien.titre}}</h5>
-          <p class="card-text">{{bien.descriptif}}</p>
+          <h5 class="card-title">
+          <a href="{{path('bien_show',{id:bien.id, slug: bien.slug})}}">{{bien.titre}}</a></h5>
+          <h5 class="text-primary">{{bien.prixMensuel | number_format(0,'','') }} €</h5>
+          <h5 class="text-primary">{{bien.prixFinal | number_format(0,'','') }} €</h5>
+          <p class="card-text">{{bien.descriptif}}</p> 
           <a href="#" class="btn btn-warning">Go</a>
         </div>
       </div>

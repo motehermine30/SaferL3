@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\BienRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Cocur\Slugify\Slugify;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: BienRepository::class)]
 class Bien
@@ -15,14 +17,11 @@ class Bien
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min:4,max:255)]
+    
     private ?string $titre = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $numero = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $surface = null;
-
+    #[Assert\NotBlank]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $descriptif = null;
 
@@ -33,13 +32,34 @@ class Bien
     private ?string $ville = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Regex("/^[0-9]{5}$/")]
     private ?string $code_postal = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $prix_mensuel = null;
+    #[ORM\Column]
+    private ?int $numero = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $prix_final = null;
+    #[ORM\Column]
+    #[Assert\Range(min:10,max:500)]
+    private ?int $surface = null;
+
+    #[ORM\Column]
+    private ?int $prix_mensuel = null;
+
+    #[ORM\Column]
+    private ?int $prix_final = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $created_at = null;
+
+    public function __construct()
+    {
+        $this->created_at = new \DateTime();
+    }
+
+    public function getSlug(): string {
+        return (new Slugify())->slugify($this->titre);
+
+    }
 
     public function getId(): ?int
     {
@@ -54,30 +74,6 @@ class Bien
     public function setTitre(string $titre): self
     {
         $this->titre = $titre;
-
-        return $this;
-    }
-
-    public function getNumero(): ?string
-    {
-        return $this->numero;
-    }
-
-    public function setNumero(string $numero): self
-    {
-        $this->numero = $numero;
-
-        return $this;
-    }
-
-    public function getSurface(): ?string
-    {
-        return $this->surface;
-    }
-
-    public function setSurface(string $surface): self
-    {
-        $this->surface = $surface;
 
         return $this;
     }
@@ -106,6 +102,8 @@ class Bien
         return $this;
     }
 
+
+
     public function getVille(): ?string
     {
         return $this->ville;
@@ -130,27 +128,65 @@ class Bien
         return $this;
     }
 
-    public function getPrixMensuel(): ?string
+    public function getNumero(): ?int
+    {
+        return $this->numero;
+    }
+
+    public function setNumero(int $numero): self
+    {
+        $this->numero = $numero;
+
+        return $this;
+    }
+
+    public function getSurface(): ?int
+    {
+        return $this->surface;
+    }
+
+    public function setSurface(int $surface): self
+    {
+        $this->surface = $surface;
+
+        return $this;
+    }
+
+    public function getPrixMensuel(): ?int
     {
         return $this->prix_mensuel;
     }
 
-    public function setPrixMensuel(string $prix_mensuel): self
+    public function setPrixMensuel(int $prix_mensuel): self
     {
         $this->prix_mensuel = $prix_mensuel;
 
         return $this;
     }
 
-    public function getPrixFinal(): ?string
+    public function getPrixFinal(): ?int
     {
         return $this->prix_final;
     }
 
-    public function setPrixFinal(string $prix_final): self
+    public function setPrixFinal(int $prix_final): self
     {
         $this->prix_final = $prix_final;
 
         return $this;
     }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $created_at): self
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    
 }

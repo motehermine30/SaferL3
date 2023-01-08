@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Bien;
+use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,7 +20,9 @@ class BienType extends AbstractType
             ->add('ville')
             ->add('code_postal')
             ->add('prix_mensuel')
-            ->add('prix_final')
+            ->add('prix_final',Integer::class,[
+                'label'=>'Prix Final'
+            ])
             ->add('descriptif',TextareaType::class,[
                 'attr'=>[
                     'rows' => 5, 
