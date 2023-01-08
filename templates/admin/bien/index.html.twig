@@ -1,6 +1,16 @@
 {% extends 'layouts/admin.html.twig' %}
 {% block title %}Biens{% endblock %}
 {% block body %}
+ <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+               {% include "layouts/partials/_topbar.html.twig" %}
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
     <h1>Biens</h1>
 
     <table class="table">
@@ -31,8 +41,8 @@
                 <td>{{ bien.prixFinal }}</td>
                 <td>{{ bien.descriptif }}</td>
                 <td>
-                    <a href="{{ path('app_bien_show', {'id': bien.id}) }}">Voir</a>
-                    <a href="{{ path('app_bien_edit', {'id': bien.id}) }}">Editer</a>
+                    <a href="{{ path('app_bien_show', {'id': bien.id}) }}" class="btn btn-warning">Voir</a>
+                    <a href="{{ path('app_bien_edit', {'id': bien.id}) }}" class="btn btn-success">Editer</a>
                 </td>
             </tr>
         {% else %}
@@ -43,5 +53,16 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_bien_new') }}">Ajout de Bien</a>
+    <a class="btn btn-primary" href="{{ path('app_bien_new') }}">Ajout de Bien</a>
+       </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            {% include "layouts/partials/_footer.html.twig" %}
+            <!-- End of Footer -->
+
+        </div>
 {% endblock %}

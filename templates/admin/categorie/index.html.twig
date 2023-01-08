@@ -3,6 +3,16 @@
 {% block title %}Categorie{% endblock %}
 
 {% block body %}
+<!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+               {% include "layouts/partials/_topbar.html.twig" %}
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
     <h1>Categorie</h1>
 
     <table class="table">
@@ -19,8 +29,8 @@
                 <td>{{ categorie.id }}</td>
                 <td>{{ categorie.nom }}</td>
                 <td>
-                    <a href="{{ path('app_categorie_show', {'id': categorie.id}) }}">show</a>
-                    <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}">edit</a>
+                    <a href="{{ path('app_categorie_show', {'id': categorie.id}) }}" class="btn btn-warning">Voir</a>
+                    <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="btn btn-success">Editer</a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +41,16 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_categorie_new') }}">Nouvelle categorie</a>
+    <a class="btn btn-primary" href="{{ path('app_categorie_new') }}">Nouvelle categorie</a>
+        </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            {% include "layouts/partials/_footer.html.twig" %}
+            <!-- End of Footer -->
+
+        </div>
 {% endblock %}
