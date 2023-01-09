@@ -3,7 +3,17 @@
 {% block title %}Contact{% endblock %}
 
 {% block body %}
-    <h1>Contact index</h1>
+ <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+               {% include "layouts/partials/_topbar.html.twig" %}
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+    <h1>Contacts</h1>
 
     <table class="table">
         <thead>
@@ -23,10 +33,10 @@
                 <td>{{ contact.nom }}</td>
                 <td>{{ contact.prenom }}</td>
                 <td>{{ contact.email }}</td>
-                <td>{{ contact.message }}</td>
+                <td>{{ contact.message | u.truncate(20,'...',false) }}</td>
                 <td>
-                    <a href="{{ path('app_contact_show', {'id': contact.id}) }}">show</a>
-                    <a href="{{ path('app_contact_edit', {'id': contact.id}) }}">edit</a>
+                    <a href="{{ path('app_contact_show', {'id': contact.id}) }}" class="btn btn-warning">Voir</a>
+                    <a href="{{ path('app_contact_edit', {'id': contact.id}) }}" class="btn btn-success">Editer</a>
                 </td>
             </tr>
         {% else %}
@@ -37,5 +47,16 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_contact_new') }}">Nouvel contact</a>
+    <a class="btn btn-primary" href="{{ path('app_contact_new') }}">Nouvel contact</a>
+          </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            {% include "layouts/partials/_footer.html.twig" %}
+            <!-- End of Footer -->
+
+        </div>
 {% endblock %}

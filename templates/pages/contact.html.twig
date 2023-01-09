@@ -1,0 +1,22 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title "contact-nous" %}
+
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+{% block body %}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-6 offset-3">
+             <h1>Contactez-Nous</h1>
+             <p>Laissez Nous un message, notre equipe prendra soin de vous dans un bref delai !</p>
+             {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+            {{message}}
+            </div>
+            {% endfor %}
+    {{ include('admin/contact/_form.html.twig') }}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

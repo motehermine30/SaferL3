@@ -3,9 +3,31 @@
 {% block title %}Nouvel-contact{% endblock %}
 {% form_theme form 'bootstrap_5_layout.html.twig' %}
 {% block body %}
+<!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+               {% include "layouts/partials/_topbar.html.twig" %}
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
     <h1>Creation de Contact</h1>
 
     {{ include('admin/contact/_form.html.twig') }}
 
-    <a href="{{ path('app_contact_index') }}">retour a la liste</a>
+    <a class="btn btn-success"  href="{{ path('app_contact_index') }}">retour a la liste</a>
+      </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            {% include "layouts/partials/_footer.html.twig" %}
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
 {% endblock %}

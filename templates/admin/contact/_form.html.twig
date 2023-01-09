@@ -1,4 +1,21 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<div class="row">
+    <div class="col-md-6">
+    {{ form_row(form.nom) }}
+    </div>
+    <div class="col-md-6">
+    {{ form_row(form.prenom) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+    {{ form_row(form.email) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+    {{ form_row(form.message) }}
+    </div>
+</div>
+    <button class="btn btn-primary mb-3">{{ button_label|default('Enregister') }}</button>
 {{ form_end(form) }}
