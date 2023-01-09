@@ -26,8 +26,15 @@
     {{ form_row(form.prix_final) }}
     </div>
 </div>
+<div class="row">
+    <div class="col-md-6">
+       {{ form_row(form.categorie) }}
+    </div>
+    <div class="col-md-6">
+    {{ form_row(form.imageFile) }}
+    </div>
+</div>
 
-    {{ form_row(form.categorie) }}
  
     {{ form_row(form.descriptif) }}
     <button class="btn btn-primary mb-3">{{ button_label|default('Enregister') }}</button>

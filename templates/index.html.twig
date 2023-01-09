@@ -49,11 +49,13 @@
       <div class="col-md-7 order-md-2">
         <h2 class="featurette-heading fw-normal lh-1">QUI SOMMES NOUS. <span class="text-muted">SAFER.</span></h2>
         <p class="lead">
+        Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum.
+        Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum.
+        Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum.
         </p>
       </div>
       <div class="col-md-5 order-md-1">
-        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
-
+        <img src="{{asset('images/about.jpg')}}" class="img-fluid">
       </div>
     </div>
     <hr class="featurette-divider">
@@ -61,16 +63,24 @@
   <div class="row justify-content-center mb-5">
   <h1 class="text-center m-5">Nos Biens</h1>
   {% for bien in biens %}
-      <div class="card mx-2 my-2" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">
+  <div class="card  mx-2 my-2" style="width: 18rem;">
+     <img 
+     class="img-fluid"
+          src="{{ (bien.imageName?vich_uploader_asset(bien)
+            : asset('build/images/placeholder.jpg'))}}"
+            alt="{{bien.titre}}">
+    <div class="card-body">
+      <h5 class="card-title">
           <a href="{{path('bien_show',{id:bien.id, slug: bien.slug})}}">{{bien.titre}}</a></h5>
-          <h5 class="text-primary">{{bien.prixMensuel | number_format(0,'','') }} €</h5>
-          <h5 class="text-primary">{{bien.prixFinal | number_format(0,'','') }} €</h5>
-          <p class="card-text">{{bien.descriptif}}</p> 
-          <a href="#" class="btn btn-warning">Go</a>
-        </div>
-      </div>
+      <p class="card-text">{{ bien.descriptif | u.truncate(20,'...',false) }}</p>
+       <h5 class="text-primary">Mensuel: {{bien.prixMensuel | number_format(0,'','') }} €</h5>
+       <h5 class="text-primary">Final: {{bien.prixFinal | number_format(0,'','') }} €</h5>
+      <a href="#" class="btn btn-primary">Ajouter Favorie</a>
+    </div>
+  </div>
+
+    
+
   {% endfor %}
   </div>
 </div>

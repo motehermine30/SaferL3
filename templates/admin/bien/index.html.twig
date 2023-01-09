@@ -20,7 +20,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Image</th>
                 <th>Titre</th>
                 <th>Numero</th>
                 <th>Surface</th>
@@ -35,7 +35,13 @@
         <tbody>
         {% for bien in biens %}
             <tr>
-                <td>{{ bien.id }}</td>
+                 <td>
+                    <img 
+                        width="100"
+                       src="{{ (bien.imageName?vich_uploader_asset(bien)
+                         : asset('build/images/placeholder.jpg'))}}"
+                         alt="{{bien.titre}}">
+                </td>
                 <td>{{ bien.titre }}</td>
                 <td>{{ bien.numero }}</td>
                 <td>{{ bien.surface }}</td>
@@ -43,7 +49,7 @@
                 <td>{{ bien.codePostal }}</td>
                 <td>{{ bien.prixMensuel }}</td>
                 <td>{{ bien.prixFinal }}</td>
-                <td>{{ bien.descriptif }}</td>
+                <td>{{ bien.descriptif | u.truncate(20,'...',false) }}</td>
                 <td>
                     <a href="{{ path('app_bien_show', {'id': bien.id}) }}" class="btn btn-warning">Voir</a>
                     <a href="{{ path('app_bien_edit', {'id': bien.id}) }}" class="btn btn-success">Editer</a>

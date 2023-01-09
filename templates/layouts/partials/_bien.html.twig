@@ -1,7 +1,13 @@
 <div class="card mb-4">
+ <img 
+                        
+        class="img-fluid"
+          src="{{ (bien.imageName?vich_uploader_asset(bien)
+            : asset('build/images/placeholder.jpg'))}}"
+            alt="{{bien.titre}}">
     <div class="card-body">
         <h5 class="card-title">
-            <a href="{{path('bien_show',{slug:bien.slug, id: bien.id})}}">
+            <a  href="{{path('bien_show',{slug:bien.slug, id: bien.id})}}">
                 {{bien.titre}}
             </a>
         </h5>

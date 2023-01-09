@@ -18,8 +18,14 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ bien.id }}</td>
+                <th>Image</th>
+                <td>
+                     <img 
+                        width="100"
+                       src="{{ (bien.imageName?vich_uploader_asset(bien)
+                         : asset('build/images/placeholder.jpg'))}}"
+                         alt="{{bien.titre}}">
+                </td>
             </tr>
             <tr>
                 <th>Titre</th>
@@ -53,6 +59,12 @@
                 <th>Descriptif</th>
                 <td>{{ bien.descriptif }}</td>
             </tr>
+             <tr>
+                 <td>{{ bien.createdAt ? bien.createdAt|date('d-m-Y') : '' }}</td>
+            </tr>
+             <tr>
+                 <td>{{ bien.updatedAt ? bien.updatedAt|date('d-m-Y') : '' }}</td>
+             </tr>
         </tbody>
     </table>
 
