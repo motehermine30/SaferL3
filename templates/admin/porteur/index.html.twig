@@ -1,0 +1,68 @@
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title %}Porteur{% endblock %}
+
+{% block body %}
+ <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+               {% include "layouts/partials/_topbar.html.twig" %}
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+    <h1>Admin</h1>
+ {% for message in app.flashes('success') %}
+<div class="alert alert-success">
+{{message}}
+</div>
+ {% endfor %}
+ <div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Username</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Email</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    <a href="{{ path('app_user_show_porteur', {'id': user.id}) }}" class="btn btn-warning">Voir</a>
+                    <a href="{{ path('app_user_edit_porteur', {'id': user.id}) }}" class="btn btn-success">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">Aucun Porteur</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+    <a class="btn btn-primary" href="{{ path('app_user_new_porteur') }}">Ajouter un Porteur</a>
+      </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            {% include "layouts/partials/_footer.html.twig" %}
+            <!-- End of Footer -->
+
+        </div>
+{% endblock %}

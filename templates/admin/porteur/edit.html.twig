@@ -1,0 +1,35 @@
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title %}Modification-porteur{% endblock %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+{% block body %}
+<!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+               {% include "layouts/partials/_topbar.html.twig" %}
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+    <h1>Modification Porteur</h1>
+    {{ include('admin/porteur/_form.html.twig', {'button_label': 'Modifier'}) }}
+    <div style="display:flex;">
+    <a class="btn btn-success mb-3 mx-2" href="{{ path('app_user_index_porteur') }}">Aller a la liste</a>
+
+    {{ include('admin/porteur/_delete_form.html.twig') }}
+            </div>
+        </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            {% include "layouts/partials/_footer.html.twig" %}
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+{% endblock %}

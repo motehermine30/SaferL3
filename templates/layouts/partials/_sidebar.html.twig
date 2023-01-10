@@ -2,7 +2,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{path('app_admin')}}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fa fa-home"></i>
                 </div>
@@ -45,6 +45,23 @@
                 </a>
             </li>
 
+             <li class="nav-item">
+                <a class="nav-link collapsed" href="{{path('app_user_index')}}" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Gestion Admin</span>
+                </a>
+            </li>
+
+             <li class="nav-item">
+                <a class="nav-link collapsed" href="{{path('app_user_index_porteur')}}" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Gestion Porteur</span>
+                </a>
+            </li>
+
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -59,11 +76,10 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="#">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Historique</span></a>
             </li>
-
           
 
             <!-- Divider -->

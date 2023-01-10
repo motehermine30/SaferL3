@@ -7,6 +7,7 @@ use App\Entity\Contact;
 use App\Form\ContactType;
 use App\Repository\BienRepository;
 use App\Repository\ContactRepository;
+use App\Services\ContactMailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -56,13 +57,27 @@ class DefaultController extends AbstractController
     }
 
     #[Route('/contact', name: 'app_contact', methods: ['GET', 'POST'])]
-    public function contact(Request $request, ContactRepository $contactRepository): Response
+    public function contact(Request $request, ContactRepository $contactRepository, ContactMailerService $contactMailerService): Response
     {
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $data = $request->request->all()['contact'];
+           // dd($data['email']);
+            $contactMailerService->send(
+                "Un nouveau email",
+                $data['email'],
+                $this->getParameter('app.mail_from_address'),
+               "email/contact.mailer.html.twig",
+               [
+               "nom" => $data['nom'],
+               "prenom" => $data['prenom'],
+               "email" => $data['email'],
+               "message" => $data['message'],
+               ]
+           );
             $contactRepository->save($contact, true);
             $this->addFlash('success','Message envoye avec success');
             return $this->redirectToRoute('app_contact', [], Response::HTTP_SEE_OTHER);
