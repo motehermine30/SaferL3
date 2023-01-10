@@ -17,7 +17,8 @@ class PorteurController extends AbstractController
     #[Route('/', name: 'app_user_index_porteur', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
-        $users = $userRepository->findByRole("");
+        $users = $userRepository->findBy(['isAdmin'=>0]);
+        //$users = $userRepository->findBy([],["roles"=>["ROLE_USER"]]);
         return $this->render('admin/porteur/index.html.twig', [
             'users' => $users,
         ]);

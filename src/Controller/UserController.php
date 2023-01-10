@@ -38,6 +38,7 @@ class UserController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+            $user->setIsAdmin((true));
             $userRepository->save($user, true);
             $this->addFlash('success','Admin ajoute avec success');
 
